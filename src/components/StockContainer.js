@@ -19,9 +19,9 @@ class StockContainer extends React.Component {
     }
     console.log(stockListings);
     return (
-      <>
+      <main>
         {stockListings}
-      </>
+      </main>
       // <>{this.props.isSearching ? searchResultListings : stockListings}</>
     );
   }

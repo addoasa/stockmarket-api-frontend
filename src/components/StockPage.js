@@ -7,7 +7,7 @@ class StockPage extends React.Component {
 
   render() {
     return (
-      <></>
+      <main></main>
     );
   }
 }
