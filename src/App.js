@@ -1,8 +1,7 @@
 import React from 'react';
 import Header from './components/Header.js';
 import ContentDisplay from './components/ContentDisplay.js';
-
-
+import './index.css'
 class App extends React.Component {
   constructor() {
     super();

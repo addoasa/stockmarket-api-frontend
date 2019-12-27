@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../styles/StockListing.css'
+import '../styles/StockListing.css';
 
 class StockListing extends React.Component {
   constructor() {
@@ -20,7 +20,7 @@ class StockListing extends React.Component {
     return (
       <>
         <h5>{this.props.stockData.name}</h5>
-        <div className="stock-listing-container">
+        <div className="stock">
           <div id="symbol-container">
             <h4>Symbol</h4>
             <h2>{this.props.stockData.symbol}</h2>
