@@ -1,5 +1,7 @@
 import React from 'react';
 import StockListing from './StockListing';
+import { Container, Row, Col } from 'reactstrap';
+
 
 class StockContainer extends React.Component {
   constructor() {
@@ -20,7 +22,9 @@ class StockContainer extends React.Component {
     console.log(stockListings);
     return (
       <main>
-        {stockListings}
+        <Container>
+          {stockListings}
+        </Container>
       </main>
       // <>{this.props.isSearching ? searchResultListings : stockListings}</>
     );

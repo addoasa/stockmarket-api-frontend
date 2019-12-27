@@ -6,9 +6,13 @@ import {
   Nav,
   NavItem,
   NavLink,
+  NavbarBrand,
   Button,
   Form,
   Input,
+  Container, 
+  Row, Col 
+
 } from 'reactstrap';
 import logo from '../logo.svg';
 
@@ -23,7 +27,9 @@ class Header extends React.Component {
         <header>
           <Navbar color="light" light expand="md">
             <Nav className="py-4 header-nav-content">
+            <NavbarBrand>
               <img className="mb-0" src={logo} alt="logo" />
+            </NavbarBrand>
               <Form>
                 <Input type="text" name="text" placeholder="search..." />
                 <Button>Search</Button>
