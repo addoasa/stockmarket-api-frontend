@@ -9,7 +9,16 @@ class ContentDisplay extends React.Component {
 
   render() {
     return (
-      <>{true ? <StockContainer /> : <StockPage />}</>
+      <>
+        {true ? 
+        <StockContainer 
+          isSearching={this.props.isSearching}
+          stocksToRender={this.props.stocksToRender}
+          searchResultsToRender={this.props.searchResultsToRender}
+        /> 
+        : 
+        <StockPage />}
+      </>
     );
   }
 }
