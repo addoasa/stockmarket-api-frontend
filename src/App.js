@@ -47,7 +47,8 @@ class App extends React.Component {
   render() {
     console.log('RenderedStocks', this.state.stocksToRender);
     return (
-      <div >
+      <div className="App p-0">
+        
         <Header
           searchTerm={this.state.searchTerm}
           searchForStock={this.searchForStock}
