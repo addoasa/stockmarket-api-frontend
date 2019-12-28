@@ -19,8 +19,17 @@ import logo from '../logo.svg';
 class Header extends React.Component {
   constructor() {
     super();
+    this.handleChange = this.handleChange.bind(this);
   }
 
+  handleChange(event){
+    if(event.target.value === ""){
+      this.props.stopSearch();
+    }else{
+      this.props.startSearch();
+      this.props.searchForStock(event.target.value);
+    }
+  }
   render() {
     return (
       <>
@@ -31,7 +40,7 @@ class Header extends React.Component {
               <img className="mb-0" src={logo} alt="logo" />
             </NavbarBrand>
               <Form>
-                <Input type="text" name="text" placeholder="search..." />
+                <Input type="text" name="text" onChange = {this.handleChange} placeholder="search..." />
                 <Button>Search</Button>
               </Form>
             </Nav>

@@ -18,6 +18,8 @@ class App extends React.Component {
       haveReachedBottom: false,
       paginationSkip : 20,
     };
+    this.startSearch = this.startSearch.bind(this); 
+    this.stopSearch = this.stopSearch.bind(this); 
     this.searchForStock = this.searchForStock.bind(this);
     this.checkHeight = this.checkHeight.bind(this);
     this.checkIfUserReachesBottom = this.checkIfUserReachesBottom.bind(this);
@@ -54,8 +56,23 @@ class App extends React.Component {
     });
   }
  
+  // --------------------------------------------------------------------------------
+  // Search Methods
+  // --------------------------------------------------------------------------------
+  startSearch(){
+    this.setState({
+      isSearching:true,
+    })
+  }
+
+  stopSearch(){
+    this.setState({
+      isSearching:false,
+    })
+  }
 
   searchForStock(query) {
+    
     fetch(`http://localhost:4000/stocks?limit=20&skip=0&search=${query}&sort=name&increasing=true`, {
       method: 'get',
       headers: {
@@ -69,8 +86,14 @@ class App extends React.Component {
       .then((readableSearchResults) => {
         this.setState({ searchResultsToRender: readableSearchResults });
       });
+      this.setState({
+        searchTerm:query,
+      })
   }
 
+  // --------------------------------------------------------------------------------
+  // Pagination Methods
+  // --------------------------------------------------------------------------------
   checkHeight() {
     // --------------------------------------------
     // Store scroll amount, current viewport and document height in state
@@ -159,7 +182,8 @@ class App extends React.Component {
     return (
       <div className="App p-0">
         <Header
-          searchTerm={this.state.searchTerm}
+          startSearch={this.startSearch}
+          stopSearch={this.stopSearch}
           searchForStock={this.searchForStock}
         />
         <ContentDisplay
