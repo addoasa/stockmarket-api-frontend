@@ -106,8 +106,15 @@ class StockContainer extends React.Component {
     return (
       <main>
         <Container>
-          <h3>Showing {this.props.paginationSkip} out of {this.props.stocksToRender.total} results</h3>
-          <h3>Sorted by {this.props.currentlySortingBy} in {this.props.sortIncrease ? "increasing" : "decreasing"} order.</h3>
+          {
+            this.props.isSearching ? 
+            <></> 
+            :
+            <div>
+              <h3>Showing {this.props.paginationSkip} out of {this.props.stocksToRender.total} results</h3>
+              <h3>Sorted by {this.props.currentlySortingBy} in {this.props.sortIncrease ? "increasing" : "decreasing"} order.</h3>
+            </div> 
+          }
           <Dropdown isOpen={this.state.dropdownOpenSort} toggle={this.toggleDropdownSort}>
             <DropdownToggle caret>
               Sort
@@ -135,7 +142,7 @@ class StockContainer extends React.Component {
           </Dropdown>
           <Dropdown isOpen={this.state.dropdownOpenOrderBy} toggle={this.toggleDropdownOrderBy}>
             <DropdownToggle caret>
-              Order by
+            {this.props.sortIncrease ? "increasing" : "decreasing"}
               </DropdownToggle>
             <DropdownMenu>
               <DropdownItem value = {true} onClick={this.setSortIncrease}>increasing</DropdownItem>

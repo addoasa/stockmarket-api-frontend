@@ -9,19 +9,23 @@ class StockListing extends React.Component {
       isStockChangeNeg: false,
     };
     this.calculateChange = this.calculateChange.bind(this);
+    this.getCusipForRouting = this.getCusipForRouting.bind(this);
   }
 
   calculateChange(open, close) {
     const change = ((close - open) / open) * 100;
     return change.toFixed(1);
   }
+  getCusipForRouting(event){
+    this.props.routeToIndividualStockPage(event.target.id)
+  }
 
   render() {
-    // console.log(this.props.stockData);
+    console.log(this.props.stockData);
    
     return (
       <>
-        <div className="stock-individual-container">
+        <div className="stock-individual-container" id ={this.props.stockData.cusip} onCick = {this.getCusipForRouting}>
           <Row className="stock-company-name-row">
               <h5 className="stock-company-name">{this.props.stockData.name}</h5>
           </Row>

@@ -12,7 +12,7 @@ class ContentDisplay extends React.Component {
       <>
         {true ? 
         <StockContainer 
-          resetPagination = {this.props.resetPagination}
+          resetPagination = {this.props.resetPagination }
           paginationSkip = {this.props.paginationSkip}
           isSearching={this.props.isSearching}
           searchTerm = {this.props.searchTerm}
@@ -24,7 +24,7 @@ class ContentDisplay extends React.Component {
           currentlySortingBy={this.props.currentlySortingBy}
           sortIncrease= {this.props.sortIncrease}
           toggleSortIncrease={this.props.toggleSortIncrease}
-
+          
         /> 
         : 
         <StockPage />}

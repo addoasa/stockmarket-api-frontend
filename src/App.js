@@ -211,6 +211,7 @@ class App extends React.Component {
     this.setState({
       sortIncrease: boolean,
     })
+    
   }
 
   render() {
