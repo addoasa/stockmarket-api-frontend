@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Link} from 'react-router';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Header from './components/Header.js';
-import ContentDisplay from './components/ContentDisplay.js';
 import Footer from './components/Footer.js';
 import './index.css';
 import StockContainer from './components/StockContainer.js';
