@@ -23,13 +23,31 @@ class StockContainer extends React.Component {
   handleClick(event){
     console.log(event.target.value);
     this.props.setSortBy(event.target.value);
-// --------------------------------------------
+    // --------------------------------------------
     // Fetch sorted data based on dropdown choice and give response data to <App /> 
     // --------------------------------------------
     if(this.props.isSearching){
+      // ----------------------
+      // Sort Search Results
+      // ----------------------
       //fetch for what the user wanted AND sort results
+      fetch(`http://localhost:4000/stocks?limit=20&skip=0&search=${this.props.searchTerm}&sort=${event.target.value}&increasing=true`, {
+        method: 'get',
+        headers: {
+          'content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+      .then((gotSortedStockData) => {
+        return gotSortedStockData.json();
+      })
+      .then((readableSortedStockData) => {
+        this.props.sortSearchResultsToRender(readableSortedStockData);
+      }); 
     }else{
-      // 
+      // ----------------------
+      // Sort ordinary results
+      // ----------------------
       fetch(`http://localhost:4000/stocks?limit=20&skip=0&sort=${event.target.value}&increasing=true`, {
         method: 'get',
         headers: {

@@ -217,6 +217,7 @@ class App extends React.Component {
           sortSearchResultsToRender={this.sortSearchResultsToRender}
           setSortBy = {this.setSortBy}
           currentlySortingBy={this.state.currentlySortingBy}
+          searchTerm={this.state.searchTerm}
         />
         <Footer />
       </div>

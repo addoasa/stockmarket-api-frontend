@@ -19,6 +19,7 @@ class ContentDisplay extends React.Component {
           sortSearchResultsToRender={this.props.sortSearchResultsToRender}
           setSortBy = {this.props.setSortBy}
           currentlySortingBy={this.props.currentlySortingBy}
+          searchTerm = {this.props.searchTerm}
         /> 
         : 
         <StockPage />}
