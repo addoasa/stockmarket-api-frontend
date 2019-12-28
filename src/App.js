@@ -16,6 +16,7 @@ class App extends React.Component {
       totalHeight: 9,
       scrollAmount: null,
       haveReachedBottom: false,
+      currentlySortingBy:"name",
       paginationSkip : 20,
     };
     this.startSearch = this.startSearch.bind(this); 
@@ -24,6 +25,7 @@ class App extends React.Component {
     this.checkHeight = this.checkHeight.bind(this);
     this.checkIfUserReachesBottom = this.checkIfUserReachesBottom.bind(this);
     this.getMoreStocks = this.getMoreStocks.bind(this);
+    this.setSortBy = this.setSortBy.bind(this);
     this.sortStocksToRender = this.sortStocksToRender.bind(this);
     this.sortSearchResultsToRender = this.sortSearchResultsToRender.bind(this);
   }
@@ -33,7 +35,7 @@ class App extends React.Component {
     // Get Initial Stock Data
     // --------------------------------------------
     // Fetch first 20 stocks and store them in state 
-    fetch('http://localhost:4000/stocks?limit=20&skip=0&sort=name&increasing=true', {
+    fetch(`http://localhost:4000/stocks?limit=20&skip=0&sort=${this.state.currentlySortingBy}&increasing=true`, {
       method: 'get',
 		  headers: {
         'content-type': 'application/json',
@@ -75,7 +77,7 @@ class App extends React.Component {
 
   searchForStock(query) {
     
-    fetch(`http://localhost:4000/stocks?limit=20&skip=0&search=${query}&sort=name&increasing=true`, {
+    fetch(`http://localhost:4000/stocks?limit=20&skip=0&search=${query}&sort=${this.state.currentlySortingBy}&increasing=true`, {
       method: 'get',
       headers: {
         'content-type': 'application/json',
@@ -140,7 +142,7 @@ class App extends React.Component {
     // If we are here, that should mean that the user has scrolled to the bottom of the page
     // Use a field called paginationSkip in state to keep track of the number of 
     // results we want to skip in order to get the next set of stocks we want
-    fetch(`http://localhost:4000/stocks?limit=20&skip=${this.state.paginationSkip}&sort=name&increasing=true`, {
+    fetch(`http://localhost:4000/stocks?limit=20&skip=${this.state.paginationSkip}&sort=${this.state.currentlySortingBy}&increasing=true`, {
     method: 'get',
     headers: {
       'content-type': 'application/json',
@@ -179,6 +181,12 @@ class App extends React.Component {
   // --------------------------------------------------------------------------------
   // Sort Methods
   // --------------------------------------------------------------------------------
+  setSortBy(chosenCriteria){
+    this.setState({
+      currentlySortingBy:chosenCriteria,
+    })
+  }
+
   sortStocksToRender(sortedStocks){
     this.setState({
       stocksToRender:sortedStocks,
@@ -189,6 +197,7 @@ class App extends React.Component {
       searchResultsToRender:sortedStocks,
     })
   }
+
   render() {
     console.log('RenderedStocks', this.state.stocksToRender);
    
@@ -206,6 +215,8 @@ class App extends React.Component {
           searchResultsToRender={this.state.searchResultsToRender}
           sortStocksToRender= {this.sortStocksToRender}
           sortSearchResultsToRender={this.sortSearchResultsToRender}
+          setSortBy = {this.setSortBy}
+          currentlySortingBy={this.state.currentlySortingBy}
         />
         <Footer />
       </div>

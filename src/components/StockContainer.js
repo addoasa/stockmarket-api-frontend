@@ -7,7 +7,6 @@ class StockContainer extends React.Component {
   constructor() {
     super();
     this.state={
-      sortBy:'name',
       dropdownOpen:false,
     }
     this.toggleDropdown = this.toggleDropdown.bind(this);
@@ -22,7 +21,30 @@ class StockContainer extends React.Component {
   }
 
   handleClick(event){
-    console.log(event.target.value)
+    console.log(event.target.value);
+    this.props.setSortBy(event.target.value);
+// --------------------------------------------
+    // Fetch sorted data based on dropdown choice and give response data to <App /> 
+    // --------------------------------------------
+    if(this.props.isSearching){
+      //fetch for what the user wanted AND sort results
+    }else{
+      // 
+      fetch(`http://localhost:4000/stocks?limit=20&skip=0&sort=${event.target.value}&increasing=true`, {
+        method: 'get',
+        headers: {
+          'content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+      .then((gotSortedStockData) => {
+        return gotSortedStockData.json();
+      })
+      .then((readableSortedStockData) => {
+        this.props.sortStocksToRender(readableSortedStockData);
+      });  
+    }
+      
   }
   render() {
     // --------------------------------------------
@@ -53,7 +75,7 @@ class StockContainer extends React.Component {
     return (
       <main>
         <Container>
-          <h3>Sorted by {this.state.sortBy}</h3>
+          <h3>Sorted by {this.props.currentlySortingBy}</h3>
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
             <DropdownToggle caret>
               Sort
