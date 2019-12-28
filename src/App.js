@@ -1,8 +1,12 @@
 import React from 'react';
+import { Router, Link} from 'react-router';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Header from './components/Header.js';
 import ContentDisplay from './components/ContentDisplay.js';
 import Footer from './components/Footer.js';
 import './index.css';
+import StockContainer from './components/StockContainer.js';
+import StockPage from './components/StockPage.js';
 
 class App extends React.Component {
   constructor() {
@@ -219,28 +223,41 @@ class App extends React.Component {
    
   
     return (
-      <div className="App p-0">
-        <Header
-          startSearch={this.startSearch}
-          stopSearch={this.stopSearch}
-          searchForStock={this.searchForStock}
-        />
-        <ContentDisplay
-          resetPagination = {this.resetPagination}
-          paginationSkip = {this.state.paginationSkip}
-          isSearching={this.state.isSearching}
-          searchTerm={this.state.searchTerm}
-          stocksToRender={this.state.stocksToRender}
-          searchResultsToRender={this.state.searchResultsToRender}
-          sortStocksToRender= {this.sortStocksToRender}
-          sortSearchResultsToRender={this.sortSearchResultsToRender}
-          setSortBy = {this.setSortBy}
-          currentlySortingBy={this.state.currentlySortingBy}
-          toggleSortIncrease={this.toggleSortIncrease}         
-          sortIncrease ={this.state.sortIncrease}
-        />
-        <Footer />
-      </div>
+      <BrowserRouter>        
+        <div className="App p-0">
+          <Header
+            startSearch={this.startSearch}
+            stopSearch={this.stopSearch}
+            searchForStock={this.searchForStock}
+          />
+          <Switch>
+            <Route 
+              exact path='/' 
+              render={(props) => {
+                return(
+                  <StockContainer {...props} 
+                    resetPagination = {this.resetPagination}
+                    paginationSkip = {this.state.paginationSkip}
+                    isSearching={this.state.isSearching}
+                    searchTerm={this.state.searchTerm}
+                    stocksToRender={this.state.stocksToRender}
+                    searchResultsToRender={this.state.searchResultsToRender}
+                    sortStocksToRender= {this.sortStocksToRender}
+                    sortSearchResultsToRender={this.sortSearchResultsToRender}
+                    setSortBy = {this.setSortBy}
+                    currentlySortingBy={this.state.currentlySortingBy}
+                    toggleSortIncrease={this.toggleSortIncrease}         
+                    sortIncrease ={this.state.sortIncrease}
+                  />
+                )
+              }
+              }  
+            />   
+            <Route path='/:cusip' component={StockPage}/>   
+          </Switch>   
+          <Footer />
+        </div>
+      </BrowserRouter> 
     );
   }
 }

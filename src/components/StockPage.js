@@ -4,10 +4,16 @@ class StockPage extends React.Component {
   constructor() {
     super();
   }
+  componentDidMount(){
+    console.log(this.props.match.params.cusip)
+    
+  }
 
   render() {
     return (
-      <main></main>
+      <main>
+        <h1></h1>
+      </main>
     );
   }
 }
