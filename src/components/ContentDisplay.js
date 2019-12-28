@@ -15,6 +15,8 @@ class ContentDisplay extends React.Component {
           isSearching={this.props.isSearching}
           stocksToRender={this.props.stocksToRender}
           searchResultsToRender={this.props.searchResultsToRender}
+          sortStocksToRender= {this.sortStocksToRender}
+          sortSearchResultsToRender={this.sortSearchResultsToRender}
         /> 
         : 
         <StockPage />}

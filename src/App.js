@@ -24,6 +24,8 @@ class App extends React.Component {
     this.checkHeight = this.checkHeight.bind(this);
     this.checkIfUserReachesBottom = this.checkIfUserReachesBottom.bind(this);
     this.getMoreStocks = this.getMoreStocks.bind(this);
+    this.sortStocksToRender = this.sortStocksToRender.bind(this);
+    this.sortSearchResultsToRender = this.sortSearchResultsToRender.bind(this);
   }
 
   componentDidMount() {
@@ -122,7 +124,7 @@ class App extends React.Component {
     console.log(totalHeight, 'document height');
     console.log(scrolled, 'scrolled');
 
-    if ((totalHeight - scrolled) === viewport) {
+    if ((totalHeight - scrolled) === viewport && !this.state.isSearching) {
       console.log('You have reached the bottom of the page');
       // Allow for some time to pass before proceeding to fetch for more data
       setTimeout(()=>{
@@ -174,7 +176,19 @@ class App extends React.Component {
     });  
   }
  
-
+  // --------------------------------------------------------------------------------
+  // Sort Methods
+  // --------------------------------------------------------------------------------
+  sortStocksToRender(sortedStocks){
+    this.setState({
+      stocksToRender:sortedStocks,
+    })
+  }
+  sortSearchResultsToRender(sortedStocks){
+    this.setState({
+      searchResultsToRender:sortedStocks,
+    })
+  }
   render() {
     console.log('RenderedStocks', this.state.stocksToRender);
    
@@ -190,6 +204,8 @@ class App extends React.Component {
           isSearching={this.state.isSearching}
           stocksToRender={this.state.stocksToRender}
           searchResultsToRender={this.state.searchResultsToRender}
+          sortStocksToRender= {this.sortStocksToRender}
+          sortSearchResultsToRender={this.sortSearchResultsToRender}
         />
         <Footer />
       </div>
