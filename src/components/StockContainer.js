@@ -7,22 +7,35 @@ class StockContainer extends React.Component {
   constructor() {
     super();
     this.state={
-      dropdownOpen:false,
+      dropdownOpenSort:false,
     }
-    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleDropdownSort = this.toggleDropdownSort.bind(this);
+    this.toggleDropdownOrderBy = this.toggleDropdownOrderBy.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.setSortIncrease = this.setSortIncrease.bind(this);
   }
-  toggleDropdown(){
-    if(this.state.dropdownOpen){
-      this.setState({dropdownOpen:false})
+  toggleDropdownSort(){
+    if(this.state.dropdownOpenSort){
+      this.setState({dropdownOpenSort:false})
     }else{
-      this.setState({dropdownOpen:true})
+      this.setState({dropdownOpenSort:true})
     }
+  }
+  toggleDropdownOrderBy(){
+    if(this.state.dropdownOpenOrderBy){
+      this.setState({dropdownOpenOrderBy:false})
+    }else{
+      this.setState({dropdownOpenOrderBy:true})
+    }
+  }
+  setSortIncrease(event){
+    this.props.toggleSortIncrease(event.target.value);
   }
 
   handleClick(event){
     console.log(event.target.value);
     this.props.setSortBy(event.target.value);
+    this.props.resetPagination();
     // --------------------------------------------
     // Fetch sorted data based on dropdown choice and give response data to <App /> 
     // --------------------------------------------
@@ -31,7 +44,7 @@ class StockContainer extends React.Component {
       // Sort Search Results
       // ----------------------
       //fetch for what the user wanted AND sort results
-      fetch(`http://localhost:4000/stocks?limit=20&skip=0&search=${this.props.searchTerm}&sort=${event.target.value}&increasing=true`, {
+      fetch(`http://localhost:4000/stocks?limit=20&skip=0&search=${this.props.searchTerm}&sort=${event.target.value}&increasing=${this.props.sortIncrease}`, {
         method: 'get',
         headers: {
           'content-type': 'application/json',
@@ -48,7 +61,7 @@ class StockContainer extends React.Component {
       // ----------------------
       // Sort ordinary results
       // ----------------------
-      fetch(`http://localhost:4000/stocks?limit=20&skip=0&sort=${event.target.value}&increasing=true`, {
+      fetch(`http://localhost:4000/stocks?limit=20&skip=0&sort=${event.target.value}&increasing=${this.props.sortIncrease}`, {
         method: 'get',
         headers: {
           'content-type': 'application/json',
@@ -93,8 +106,9 @@ class StockContainer extends React.Component {
     return (
       <main>
         <Container>
-          <h3>Sorted by {this.props.currentlySortingBy}</h3>
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+          <h3>Showing {this.props.paginationSkip} out of {this.props.stocksToRender.total} results</h3>
+          <h3>Sorted by {this.props.currentlySortingBy} in {this.props.sortIncrease ? "increasing" : "decreasing"} order.</h3>
+          <Dropdown isOpen={this.state.dropdownOpenSort} toggle={this.toggleDropdownSort}>
             <DropdownToggle caret>
               Sort
               </DropdownToggle>
@@ -117,6 +131,16 @@ class StockContainer extends React.Component {
               <DropdownItem value = "low" onClick={this.handleClick}>low</DropdownItem>
               <DropdownItem divider />
               <DropdownItem value = "change" onClick={this.handleClick}>change</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown isOpen={this.state.dropdownOpenOrderBy} toggle={this.toggleDropdownOrderBy}>
+            <DropdownToggle caret>
+              Order by
+              </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem value = {true} onClick={this.setSortIncrease}>increasing</DropdownItem>
+              <DropdownItem value = {false} onClick={this.setSortIncrease}>decreasing</DropdownItem>
+              <DropdownItem divider />
             </DropdownMenu>
           </Dropdown>
             {this.props.isSearching ? searchResultListings : stockListings}

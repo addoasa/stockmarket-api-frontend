@@ -16,8 +16,10 @@ class App extends React.Component {
       totalHeight: 9,
       scrollAmount: null,
       haveReachedBottom: false,
-      currentlySortingBy:"name",
       paginationSkip : 20,
+      currentlySortingBy:"name",
+      sortIncrease: true
+      
     };
     this.startSearch = this.startSearch.bind(this); 
     this.stopSearch = this.stopSearch.bind(this); 
@@ -25,9 +27,11 @@ class App extends React.Component {
     this.checkHeight = this.checkHeight.bind(this);
     this.checkIfUserReachesBottom = this.checkIfUserReachesBottom.bind(this);
     this.getMoreStocks = this.getMoreStocks.bind(this);
+    this.resetPagination = this.resetPagination.bind(this);
     this.setSortBy = this.setSortBy.bind(this);
     this.sortStocksToRender = this.sortStocksToRender.bind(this);
     this.sortSearchResultsToRender = this.sortSearchResultsToRender.bind(this);
+    this.toggleSortIncrease = this.toggleSortIncrease.bind(this);
   }
 
   componentDidMount() {
@@ -142,7 +146,7 @@ class App extends React.Component {
     // If we are here, that should mean that the user has scrolled to the bottom of the page
     // Use a field called paginationSkip in state to keep track of the number of 
     // results we want to skip in order to get the next set of stocks we want
-    fetch(`http://localhost:4000/stocks?limit=20&skip=${this.state.paginationSkip}&sort=${this.state.currentlySortingBy}&increasing=true`, {
+    fetch(`http://localhost:4000/stocks?limit=20&skip=${this.state.paginationSkip}&sort=${this.state.currentlySortingBy}&increasing=${this.state.sortIncrease}`, {
     method: 'get',
     headers: {
       'content-type': 'application/json',
@@ -177,6 +181,11 @@ class App extends React.Component {
       return {paginationSkip: state.paginationSkip + 20};
     });  
   }
+
+  resetPagination(){
+    // Reset pagination to 20 when user attemots to sort
+    this.setState({paginationSkip: 20});   
+  }
  
   // --------------------------------------------------------------------------------
   // Sort Methods
@@ -198,6 +207,12 @@ class App extends React.Component {
     })
   }
 
+  toggleSortIncrease(boolean){
+    this.setState({
+      sortIncrease: boolean,
+    })
+  }
+
   render() {
     console.log('RenderedStocks', this.state.stocksToRender);
    
@@ -210,14 +225,18 @@ class App extends React.Component {
           searchForStock={this.searchForStock}
         />
         <ContentDisplay
+          resetPagination = {this.resetPagination}
+          paginationSkip = {this.state.paginationSkip}
           isSearching={this.state.isSearching}
+          searchTerm={this.state.searchTerm}
           stocksToRender={this.state.stocksToRender}
           searchResultsToRender={this.state.searchResultsToRender}
           sortStocksToRender= {this.sortStocksToRender}
           sortSearchResultsToRender={this.sortSearchResultsToRender}
           setSortBy = {this.setSortBy}
           currentlySortingBy={this.state.currentlySortingBy}
-          searchTerm={this.state.searchTerm}
+          toggleSortIncrease={this.toggleSortIncrease}         
+          sortIncrease ={this.state.sortIncrease}
         />
         <Footer />
       </div>

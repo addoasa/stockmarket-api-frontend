@@ -20,6 +20,7 @@ class Header extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+
   }
 
   handleChange(event){
@@ -30,6 +31,7 @@ class Header extends React.Component {
       this.props.searchForStock(event.target.value);
     }
   }
+
   render() {
     return (
       <>
