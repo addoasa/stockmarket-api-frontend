@@ -17,36 +17,30 @@ class StockListing extends React.Component {
   }
 
   render() {
-    console.log(this.props.stockData);
+    // console.log(this.props.stockData);
+   
     return (
       <>
-        <div className="stock-whole-container">
-          <Row className="p-0 m-0">
-              <h5 className = "stock-company-name">{this.props.stockData.name}</h5>
+        <div className="stock-individual-container">
+          <Row className="stock-company-name-row">
+              <h5 className="stock-company-name">{this.props.stockData.name}</h5>
           </Row>
-          <Row className="p-0  stock-listing">
+          <Row className="p-3  stock-listing-row">
             <Col id="symbol-container">
               <h4>Symbol</h4>
               <h2>{this.props.stockData.symbol}</h2>
             </Col>
             <Col id="open-container">
               <h4>Open</h4>
-              <h2>{this.props.stockData.open}</h2>
-
+              <h2>{Math.ceil(this.props.stockData.open)}</h2>
             </Col>
             <Col id="close-container">
               <h4>Close</h4>
-              <h2>{this.props.stockData.close}</h2>
-
+              <h2>{Math.ceil(this.props.stockData.close)}</h2>
             </Col>
             <Col id="change-container">
               <h4>Change</h4>
-              <h2>
-                {this.calculateChange(this.props.stockData.open, this.props.stockData.close)}
-                {' '}
-      %
-              </h2>
-
+              <h2>{this.calculateChange(this.props.stockData.open, this.props.stockData.close)} % </h2>
             </Col>
             <Col id="highlo-container">
               <h4>High</h4>

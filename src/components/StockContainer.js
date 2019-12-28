@@ -9,6 +9,10 @@ class StockContainer extends React.Component {
   }
 
   render() {
+    // --------------------------------------------
+    // Iterate through the stocks objects that were passed here from props
+    // --------------------------------------------
+
     const searchResultListings = [];
     let stockListings;
     // Conditional to prevent .map() from running before stocks are recieved
@@ -19,7 +23,7 @@ class StockContainer extends React.Component {
       // create a <StockListing /> component for every object in stockListings array
         <StockListing key={`stock${index}`} stockData={stock} />);
     }
-    console.log(stockListings);
+    
     return (
       <main>
         <Container>

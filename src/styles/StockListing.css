@@ -1,14 +1,9 @@
-.stock-listing{
-  border: solid 1pt rgba(0,0,0,0.1);
+.stock-listing-row{
+  border: solid 1pt rgba(0,0,0,0.03);
   background-color: whitesmoke;
 }
 
-.stock-company-name{
-  border-radius: 5px;
-  border-bottom: 0;
-}
-
-.stock-whole-container{
-  border: solid 1pt rgba(0,0,0,0.1);
-
+.stock-individual-container{
+  /* border: solid 1pt rgba(255, 0, 0, 0.7); */
+  margin-top: 2%;
 }
