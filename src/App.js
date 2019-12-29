@@ -3,7 +3,6 @@ import { Router} from 'react-router';
 import {BrowserRouter, Route, Switch , Link} from 'react-router-dom';
 import { Spinner } from 'reactstrap';
 import Header from './components/Header.js';
-import Footer from './components/Footer.js';
 import './index.css';
 import StockContainer from './components/StockContainer.js';
 import StockPage from './components/StockPage.js';
