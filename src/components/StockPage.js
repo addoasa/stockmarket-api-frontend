@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Spinner } from 'reactstrap';
 
 class StockPage extends React.Component {
   constructor() {
@@ -11,11 +11,12 @@ class StockPage extends React.Component {
       close: '', 
       high: '', 
       low: '', 
+      isLoaded: false,
     }
     this.calculateChange = this.calculateChange.bind(this);
   }
   componentDidMount(){
-    this.props.toggleStockPageIsActive();
+    this.props.toggleStockPageIsActive(true);
     console.log(this.props.match.params.cusip)
     fetch(`http://localhost:4000/stocks/${this.props.match.params.cusip}`,{
       method:'get',
@@ -36,6 +37,7 @@ class StockPage extends React.Component {
          close: readableUniqueStockData.close, 
          high: readableUniqueStockData.high, 
          low: readableUniqueStockData.low, 
+         isLoaded: true,
         });
     });
   }
@@ -48,6 +50,8 @@ class StockPage extends React.Component {
   render() {
     return (
       <main>
+        {
+        this.state.isLoaded ? 
         <Container>
           <Row>
             <Col>
@@ -80,8 +84,11 @@ class StockPage extends React.Component {
             </Col>
           </Row>
         </Container>
+        : 
+        <Spinner color= "primary" />
+        }
       </main>
-    );
+      );
   }
 }
 

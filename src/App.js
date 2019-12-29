@@ -223,16 +223,10 @@ class App extends React.Component {
   // Routing Methods
   // --------------------------------------------------------------------------------
 
-  toggleStockPageIsActive(){
-    if(this.state.isStockPageActive){
+  toggleStockPageIsActive(boolean){
       this.setState({
-        isStockPageActive: false,
+        isStockPageActive: boolean,
       })
-    }else{
-      this.setState({
-        isStockPageActive: true,
-      })
-    }
   }
   
 

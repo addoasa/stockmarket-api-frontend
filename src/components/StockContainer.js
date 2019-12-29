@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Spinner } from 'reactstrap';
 import StockListing from './StockListing';
 
 
@@ -8,6 +8,7 @@ class StockContainer extends React.Component {
     super();
     this.state={
       dropdownOpenSort:false,
+      isSorting: false,
     }
     this.toggleDropdownSort = this.toggleDropdownSort.bind(this);
     this.toggleDropdownOrderBy = this.toggleDropdownOrderBy.bind(this);
@@ -16,7 +17,7 @@ class StockContainer extends React.Component {
   }
 
   componentDidMount(){
-    this.props.toggleStockPageIsActive();
+    this.props.toggleStockPageIsActive(false);
 
   }
   toggleDropdownSort(){
@@ -38,6 +39,7 @@ class StockContainer extends React.Component {
   }
 
   handleClick(event){
+    this.setState({isSorting:true})
     console.log(event.target.value);
     this.props.setSortBy(event.target.value);
     this.props.resetPagination();
@@ -61,6 +63,7 @@ class StockContainer extends React.Component {
       })
       .then((readableSortedStockData) => {
         this.props.sortSearchResultsToRender(readableSortedStockData);
+        this.setState({isSorting:false})
       }); 
     }else{
       // ----------------------
@@ -78,7 +81,9 @@ class StockContainer extends React.Component {
       })
       .then((readableSortedStockData) => {
         this.props.sortStocksToRender(readableSortedStockData);
+        this.setState({isSorting:false})
       });  
+
     }
       
   }
@@ -108,6 +113,20 @@ class StockContainer extends React.Component {
         <StockListing key={`stock${index}`} stockData={stock}  />);
     }
 
+    let listToRender;
+    if(this.props.isSearching){
+      if(this.props.searchResultsToRender === "{}"){
+        listToRender = <Spinner />
+      }else{
+        listToRender = searchResultListings;
+      }
+    }else{
+      if(this.props.stocksToRender === "{}"){
+        listToRender = <Spinner />
+      }else{
+        listToRender = stockListings;
+      }
+    }
     return (
       <main>
         <Container>
@@ -155,10 +174,9 @@ class StockContainer extends React.Component {
               <DropdownItem divider />
             </DropdownMenu>
           </Dropdown>
-            {this.props.isSearching ? searchResultListings : stockListings}
+            {listToRender && !this.state.isSorting ? listToRender : <Spinner color="primary" />}
         </Container>
       </main>
-      // <>{this.props.isSearching ? searchResultListings : stockListings}</>
     );
   }
 }
