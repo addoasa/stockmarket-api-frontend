@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router} from 'react-router';
-import {BrowserRouter, Route, Switch , Link} from 'react-router-dom'
+import {BrowserRouter, Route, Switch , Link} from 'react-router-dom';
+import { Spinner } from 'reactstrap';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import './index.css';
@@ -14,6 +15,7 @@ class App extends React.Component {
       stocksToRender: {},
       searchTerm: '',
       searchResultsToRender: {},
+      isFetchingMoreStocks:false,
       isSearching: false,
       windowHeight: null,
       totalHeight: 9,
@@ -137,6 +139,7 @@ class App extends React.Component {
 
     if ((totalHeight - scrolled) === viewport && !this.state.isSearching) {
       console.log('You have reached the bottom of the page');
+      this.setState({isFetchingMoreStocks:true})
       // Allow for some time to pass before proceeding to fetch for more data
       setTimeout(()=>{
         this.getMoreStocks();
@@ -183,7 +186,10 @@ class App extends React.Component {
     });
     // increment the pagination count in preparation for the next time
     this.setState((state, props) => {
-      return {paginationSkip: state.paginationSkip + 20};
+      return {
+        paginationSkip: state.paginationSkip + 20, 
+        isFetchingMoreStocks:false,
+      };
     });  
   }
 
@@ -278,6 +284,7 @@ class App extends React.Component {
               }  
             />  
           </Switch>   
+          {this.state.isFetchingMoreStocks ? <Spinner /> : <></>}
           <Footer />
         </div>
       </BrowserRouter> 

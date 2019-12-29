@@ -7,3 +7,102 @@
   /* border: solid 1pt rgba(255, 0, 0, 0.7); */
   margin-top: 2%;
 }
+#highlo-container input{
+  -webkit-appearance: none;
+
+}
+/* ---------------------
+Chrome slider
+--------------------- */
+#highlo-container input::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 5px;
+  background: rgba(0,0,0,0.8);
+  border: none;
+  border-radius: 3px;
+}
+
+#highlo-container input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 2pt white solid;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.8);
+  margin-top: -4px;
+}
+
+#highlo-container input:focus {
+  outline: none;
+}
+
+/* ---------------------
+Firefox slider
+--------------------- */
+
+#highlo-container input{
+  border: 1px solid white; 
+  width: 300px;
+}
+
+#highlo-container input::-moz-range-track {
+  width: 300px;
+  height: 5px;
+  background: black;
+  border: none;
+  border-radius: 3px;
+}
+
+#highlo-container input::-moz-range-thumb {
+  border: 0.2pt white solid;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: black;
+}
+
+/*hide the outline behind the border*/
+#highlo-container input:-moz-focusring{
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+
+#highlo-container input:focus::-moz-range-track {
+  background: #ccc;
+}
+
+/* ---------------------
+ie10 slider
+--------------------- */
+#highlo-container input::-ms-track {
+  width: 300px;
+  height: 5px;
+  /*remove bg colour from the track*/
+  background: transparent;
+  
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+  color: transparent;
+}
+#highlo-container input::-ms-fill-lower {
+  background: green;
+  border-radius: 10px;
+}
+#highlo-container input::-ms-fill-upper {
+  background: red;
+  border-radius: 10px;
+}
+#highlo-container input::-ms-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.8));
+}
+#highlo-container input:focus::-ms-fill-lower {
+  background: #888;
+}
+#highlo-container input:focus::-ms-fill-upper {
+  background: #ccc;
+}
