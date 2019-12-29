@@ -1,14 +1,11 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch , Link} from 'react-router-dom'
+import {BrowserRouter, Route, Switch , Link} from 'react-router-dom';
 import '../styles/StockListing.css';
 import { Container, Row, Col } from 'reactstrap';
 
 class StockListing extends React.Component {
   constructor() {
     super();
-    this.state = {
-      isStockChangeNeg: false,
-    };
     this.calculateChange = this.calculateChange.bind(this);
     this.getCusipForRouting = this.getCusipForRouting.bind(this);
   }
@@ -20,12 +17,12 @@ class StockListing extends React.Component {
     return change.toFixed(1);
   }
   getCusipForRouting(event){
-    this.props.routeToIndividualStockPage(event.target.id)
+    this.props.routeToIndividualStockPage(event.target.id);
   }
 
   render() {
     console.log(this.props.stockData);
-    let change = this.calculateChange(this.props.stockData.open, this.props.stockData.close);
+    const change = this.calculateChange(this.props.stockData.open, this.props.stockData.close);
    
     return (
       <Link className="stock-individual-container-link" to={`/${this.props.stockData.cusip}`}>

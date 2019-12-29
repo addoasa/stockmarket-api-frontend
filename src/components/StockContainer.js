@@ -150,23 +150,23 @@ class StockContainer extends React.Component {
                 </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem header>Choose criteria</DropdownItem>
-                <DropdownItem value = "name" onClick={this.handleClick}>name</DropdownItem>
+                <DropdownItem value ="name" onClick={this.handleClick}>name</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "symbol" onClick={this.handleClick}>symbol</DropdownItem>
+                <DropdownItem value ="symbol" onClick={this.handleClick}>symbol</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "cusip" onClick={this.handleClick}>cusip</DropdownItem>
+                <DropdownItem value ="cusip" onClick={this.handleClick}>cusip</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "isin" onClick={this.handleClick}>isin</DropdownItem>
+                <DropdownItem value ="isin" onClick={this.handleClick}>isin</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "open" onClick={this.handleClick}>open</DropdownItem>
+                <DropdownItem value ="open" onClick={this.handleClick}>open</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "close" onClick={this.handleClick}>close</DropdownItem>
+                <DropdownItem value ="close" onClick={this.handleClick}>close</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "high" onClick={this.handleClick}>high</DropdownItem>
+                <DropdownItem value ="high" onClick={this.handleClick}>high</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "low" onClick={this.handleClick}>low</DropdownItem>
+                <DropdownItem value ="low" onClick={this.handleClick}>low</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem value = "change" onClick={this.handleClick}>change</DropdownItem>
+                <DropdownItem value ="change" onClick={this.handleClick}>change</DropdownItem>
               </DropdownMenu>
             </Dropdown>
               <Dropdown isOpen={this.state.dropdownOpenOrderBy} toggle={this.toggleDropdownOrderBy} className="orderBy-dropDown">
@@ -175,8 +175,8 @@ class StockContainer extends React.Component {
               Order By
                 </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem value = {true} onClick={this.setSortIncrease}>ascending</DropdownItem>
-                <DropdownItem value = {false} onClick={this.setSortIncrease}>descending</DropdownItem>
+                <DropdownItem value ={true} onClick={this.setSortIncrease}>ascending</DropdownItem>
+                <DropdownItem value ={false} onClick={this.setSortIncrease}>descending</DropdownItem>
                 <DropdownItem divider />
               </DropdownMenu>
             </Dropdown>
@@ -186,7 +186,7 @@ class StockContainer extends React.Component {
           {/* if there is content to render AND there is no sorting happing => show content...
           otherwise the application is still thinking */}
           <div className="stock-listing-container">
-            {listToRender && !this.state.isSorting ? listToRender : <Spinner className = "maincontent-loading-spinner"  style={{ width: '10rem', height: '10rem' }} size="lg"  color="secondary" />}
+            {listToRender && !this.state.isSorting ? listToRender : <Spinner className ="maincontent-loading-spinner" style={{ width: '10rem', height: '10rem' }} size="lg" color="secondary" />}
           </div>
         </Container>
       </main>
