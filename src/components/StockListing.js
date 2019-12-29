@@ -1,13 +1,12 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch , Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/StockListing.css';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 class StockListing extends React.Component {
   constructor() {
     super();
     this.calculateChange = this.calculateChange.bind(this);
-    this.getCusipForRouting = this.getCusipForRouting.bind(this);
   }
 
 
@@ -16,17 +15,14 @@ class StockListing extends React.Component {
     const change = ((close - open) / open) * 100;
     return change.toFixed(1);
   }
-  getCusipForRouting(event){
-    this.props.routeToIndividualStockPage(event.target.id);
-  }
+
 
   render() {
-    console.log(this.props.stockData);
     const change = this.calculateChange(this.props.stockData.open, this.props.stockData.close);
    
     return (
       <Link className="stock-individual-container-link" to={`/${this.props.stockData.cusip}`}>
-        <div className={change > 0 ? "stock-individual-container" : "stock-individual-container-bad" } id ={this.props.stockData.cusip} onCick = {this.getCusipForRouting}>
+        <div className={change > 0 ? "stock-individual-container" : "stock-individual-container-bad" } id ={this.props.stockData.cusip}>
           <Row className="stock-company-name-row">
               <h5 className="stock-company-name">{this.props.stockData.name}</h5>
           </Row>
@@ -52,7 +48,7 @@ class StockListing extends React.Component {
                 <h4 className="stock-listing-label">Low</h4>
                 <h4 className="stock-listing-label">High</h4>
               </div>
-              <input type="range" max={this.props.stockData.high} min={this.props.stockData.low} value={this.props.stockData.close} />
+              <input readOnly type="range" max={this.props.stockData.high} min={this.props.stockData.low} value={this.props.stockData.close} />
             </Col>
           </Row>
         </div>

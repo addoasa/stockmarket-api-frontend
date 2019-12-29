@@ -1,6 +1,5 @@
 import React from 'react';
-import { Router} from 'react-router';
-import {BrowserRouter, Route, Switch , Link} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { Spinner } from 'reactstrap';
 import Header from './components/Header.js';
 import './index.css';
@@ -132,12 +131,8 @@ class App extends React.Component {
     const viewport = Math.round(this.state.windowHeight);
     const totalHeight = Math.round(this.state.totalHeight);
     const scrolled = Math.round(this.state.scrollAmount);
-    console.log(viewport, 'viewport');
-    console.log(totalHeight, 'document height');
-    console.log(scrolled, 'scrolled');
 
     if ((totalHeight - scrolled) === viewport && !this.state.isSearching) {
-      console.log('You have reached the bottom of the page');
       this.setState({isFetchingMoreStocks:true})
       // Allow for some time to pass before proceeding to fetch for more data
       setTimeout(()=>{
@@ -235,10 +230,7 @@ class App extends React.Component {
   }
   
 
-  render() {
-    console.log('RenderedStocks', this.state.stocksToRender);
-   
-  
+  render() {  
     return (
       <BrowserRouter>        
         <div className="App p-0">

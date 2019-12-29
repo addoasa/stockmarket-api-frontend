@@ -18,7 +18,6 @@ class StockPage extends React.Component {
   }
   componentDidMount(){
     this.props.toggleStockPageIsActive(true);
-    console.log(this.props.match.params.cusip)
     fetch(`http://localhost:4000/stocks/${this.props.match.params.cusip}`,{
       method:'get',
       headers: {
@@ -30,7 +29,6 @@ class StockPage extends React.Component {
         return gotUniqueStockData.json();
       })
       .then((readableUniqueStockData) => {
-        console.log(readableUniqueStockData)
         this.setState({
           name: readableUniqueStockData.name,
           symbol: readableUniqueStockData.symbol,
@@ -67,11 +65,11 @@ class StockPage extends React.Component {
               </div>
               <div className = "stockpage-arrow-svg">
                 {change > 0 ?
-                <svg id="i-arrow-top"  viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <svg id="i-arrow-top"  viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                   <path d="M6 10 L16 2 26 10 M16 2 L16 30" />
                 </svg>
                   :
-                <svg id="i-arrow-bottom"  viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <svg id="i-arrow-bottom"  viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                   <path d="M6 22 L16 30 26 22 M16 30 L16 2" />
                 </svg>}
               </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Spinner } from 'reactstrap';
+import { Container, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Spinner } from 'reactstrap';
 import StockListing from './StockListing';
 import '../styles/StockContainer.css'
 
@@ -41,7 +41,6 @@ class StockContainer extends React.Component {
 
   handleClick(event){
     this.setState({isSorting:true})
-    console.log(event.target.value);
     this.props.setSortBy(event.target.value);
     this.props.resetPagination();
     // --------------------------------------------
@@ -89,7 +88,6 @@ class StockContainer extends React.Component {
       
   }
   render() {
-    console.log(this.props.sortIncrease, "rofl")
     // --------------------------------------------
     // Iterate through the stocks objects that were passed here from props
     // --------------------------------------------

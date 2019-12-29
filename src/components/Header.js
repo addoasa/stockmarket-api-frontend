@@ -1,19 +1,12 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch , Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../styles/Header.css';
 import {
-  Collapse,
   Navbar,
   Nav,
-  NavItem,
-  NavLink,
   NavbarBrand,
-  Button,
   Form,
   Input,
-  Container, 
-  Row, Col 
-
 } from 'reactstrap';
 import logo from '../logo.svg';
 
