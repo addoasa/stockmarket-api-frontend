@@ -285,7 +285,6 @@ class App extends React.Component {
             />  
           </Switch>   
           {this.state.isFetchingMoreStocks ? <Spinner /> : <></>}
-          <Footer />
         </div>
       </BrowserRouter> 
     );

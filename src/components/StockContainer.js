@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Spinner } from 'reactstrap';
 import StockListing from './StockListing';
+import '../styles/StockContainer.css'
 
 
 class StockContainer extends React.Component {
@@ -88,6 +89,7 @@ class StockContainer extends React.Component {
       
   }
   render() {
+    console.log(this.props.sortIncrease, "rofl")
     // --------------------------------------------
     // Iterate through the stocks objects that were passed here from props
     // --------------------------------------------
@@ -130,51 +132,60 @@ class StockContainer extends React.Component {
     return (
       <main>
         <Container>
-          {
-            this.props.isSearching ? 
-            <></> 
-            :
-            <div>
-              <h3>Showing {this.props.paginationSkip} out of {this.props.stocksToRender.total} results</h3>
-              <h3>Sorted by {this.props.currentlySortingBy} in {this.props.sortIncrease ? "increasing" : "decreasing"} order.</h3>
-            </div> 
-          }
-          <Dropdown isOpen={this.state.dropdownOpenSort} toggle={this.toggleDropdownSort}>
-            <DropdownToggle caret>
-              Sort
-              </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem header>Choose criteria</DropdownItem>
-              <DropdownItem value = "name" onClick={this.handleClick}>name</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "symbol" onClick={this.handleClick}>symbol</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "cusip" onClick={this.handleClick}>cusip</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "isin" onClick={this.handleClick}>isin</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "open" onClick={this.handleClick}>open</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "close" onClick={this.handleClick}>close</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "high" onClick={this.handleClick}>high</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "low" onClick={this.handleClick}>low</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem value = "change" onClick={this.handleClick}>change</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-          <Dropdown isOpen={this.state.dropdownOpenOrderBy} toggle={this.toggleDropdownOrderBy}>
-            <DropdownToggle caret>
-            {this.props.sortIncrease ? "increasing" : "decreasing"}
-              </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem value = {true} onClick={this.setSortIncrease}>increasing</DropdownItem>
-              <DropdownItem value = {false} onClick={this.setSortIncrease}>decreasing</DropdownItem>
-              <DropdownItem divider />
-            </DropdownMenu>
-          </Dropdown>
-            {listToRender && !this.state.isSorting ? listToRender : <Spinner color="primary" />}
+          <div className="stock-hud">
+            {
+              this.props.isSearching ? 
+              <></> 
+              :
+              <div className="stock-hud-left">
+                <h3 className="stock-hud-title">Stocks</h3>
+                <h5 className="stock-hud-info">Showing {this.props.paginationSkip} out of {this.props.stocksToRender.total} results</h5>
+                {/* <h3>Sort by {this.props.currentlySortingBy} in {this.props.sortIncrease} order.</h3> */}
+              </div> 
+            }
+            <div className="stock-hud-right sorting-dropDown-menus">
+              <Dropdown isOpen={this.state.dropdownOpenSort} toggle={this.toggleDropdownSort} className="sort-dropDown">
+              <DropdownToggle caret>
+                Sort
+                </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem header>Choose criteria</DropdownItem>
+                <DropdownItem value = "name" onClick={this.handleClick}>name</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "symbol" onClick={this.handleClick}>symbol</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "cusip" onClick={this.handleClick}>cusip</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "isin" onClick={this.handleClick}>isin</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "open" onClick={this.handleClick}>open</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "close" onClick={this.handleClick}>close</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "high" onClick={this.handleClick}>high</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "low" onClick={this.handleClick}>low</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem value = "change" onClick={this.handleClick}>change</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+              <Dropdown isOpen={this.state.dropdownOpenOrderBy} toggle={this.toggleDropdownOrderBy} className="orderBy-dropDown">
+              <DropdownToggle caret>
+              {/* {this.props.sortIncrease ? "asc" : "desc"} */}
+              Order By
+                </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem value = {true} onClick={this.setSortIncrease}>ascending</DropdownItem>
+                <DropdownItem value = {false} onClick={this.setSortIncrease}>descending</DropdownItem>
+                <DropdownItem divider />
+              </DropdownMenu>
+            </Dropdown>
+            </div>
+          </div>
+          <hr></hr>
+          {/* if there is content to render AND there is no sorting happing => show content...
+          otherwise the application is still thinking */}
+            {listToRender && !this.state.isSorting ? listToRender : <Spinner className = "maincontent-loading-spinner"  style={{ width: '10rem', height: '10rem' }} size="lg"  color="secondary" />}
         </Container>
       </main>
     );

@@ -1,3 +1,35 @@
 .header-nav-content{
+  width:97vw;
   display:flex;
+  justify-content: space-between;
+  padding-left: 11% ;
+  padding-right: 14% ;
+  
+}
+.header-navbar{
+  display:flex;
+  height:60%;
+
+}
+.header-nav-logo{
+  height:3.75em;
+  opacity: 0.7;
+}
+.header-nav-form{
+  margin-top: 2%;
+  margin-left: 5%;
+}
+.header-nav-backbtn-wrapper{
+  padding-top: 6.75%;
+  padding-bottom: 6.75%;
+  margin-left: 11.5em;
+}
+.header-nav-backbtn{
+  background-color: rgba(0,0,0,0.8);
+  width:7em;
+  height:3em;
+  border: none;
+  outline:none;
+  margin-left: 11%; 
+
 }

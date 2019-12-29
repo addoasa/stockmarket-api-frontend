@@ -37,19 +37,23 @@ class Header extends React.Component {
     return (
       <>
         <header>
-          <Navbar color="light" light expand="md">
-            <Nav className="py-4 header-nav-content">
-            <NavbarBrand>
-              <img className="mb-0" src={logo} alt="logo" />
-            </NavbarBrand>
+          <Navbar color="light" light expand="lg">
+            <Nav className="py-4 header-navbar ">
             {
               this.props.isStockPageActive ? 
-              <Link to= "/"><button>Back</button></Link>
+              <Link to= "/" className="header-nav-backbtn-wrapper"><button className ="header-nav-backbtn">Go Back</button></Link>
               :
-              <Form>
+
+            <div className="header-nav-content">
+            <NavbarBrand>
+              <img className="mb-0 header-nav-logo" src={logo} alt="logo" />
+            </NavbarBrand>
+          
+           
+              <Form className="header-nav-form">
                 <Input type="text" name="text" onChange = {this.handleChange} placeholder="search..." />
-                <Button>Search</Button>
               </Form>
+            </div>
             }
             </Nav>
           </Navbar>
