@@ -36,11 +36,11 @@ class StockListing extends React.Component {
             </Col>
             <Col id="open-container">
               <h4>Open</h4>
-              <h2>{Math.ceil(this.props.stockData.open)}</h2>
+              <h2>{Math.round(this.props.stockData.open)}</h2>
             </Col>
             <Col id="close-container">
               <h4>Close</h4>
-              <h2>{Math.ceil(this.props.stockData.close)}</h2>
+              <h2>{Math.round(this.props.stockData.close)}</h2>
             </Col>
             <Col id="change-container">
               <h4>Change</h4>
