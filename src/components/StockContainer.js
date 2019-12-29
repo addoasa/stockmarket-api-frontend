@@ -185,7 +185,9 @@ class StockContainer extends React.Component {
           <hr></hr>
           {/* if there is content to render AND there is no sorting happing => show content...
           otherwise the application is still thinking */}
+          <div className="stock-listing-container">
             {listToRender && !this.state.isSorting ? listToRender : <Spinner className = "maincontent-loading-spinner"  style={{ width: '10rem', height: '10rem' }} size="lg"  color="secondary" />}
+          </div>
         </Container>
       </main>
     );

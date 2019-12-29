@@ -283,7 +283,10 @@ class App extends React.Component {
               }  
             />  
           </Switch>   
-          {this.state.isFetchingMoreStocks ? <Spinner /> : <></>}
+          {/* Unfortunatly cannot conditionally render pagination loading spinner for now due to page height being altered by spinner mounting => causing multiple fetch requests*/}
+          {/* {this.state.isFetchingMoreStocks ? <Spinner className = "pagination-loading-spinner" size="sm"   color="secondary"/> : <></>} */}
+          {/* Spinner will always exist, but it will run away from the user */}
+          {this.state.isSearching ? <></> : <Spinner className = "pagination-loading-spinner" size="sm"   color="secondary"/>}
         </div>
       </BrowserRouter> 
     );
