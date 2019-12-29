@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter, Route, Switch , Link} from 'react-router-dom'
 import '../styles/StockListing.css';
 import { Container, Row, Col } from 'reactstrap';
 
@@ -12,6 +13,8 @@ class StockListing extends React.Component {
     this.getCusipForRouting = this.getCusipForRouting.bind(this);
   }
 
+
+
   calculateChange(open, close) {
     const change = ((close - open) / open) * 100;
     return change.toFixed(1);
@@ -24,7 +27,7 @@ class StockListing extends React.Component {
     console.log(this.props.stockData);
    
     return (
-      <>
+      <Link to={`/${this.props.stockData.cusip}`}>
         <div className="stock-individual-container" id ={this.props.stockData.cusip} onCick = {this.getCusipForRouting}>
           <Row className="stock-company-name-row">
               <h5 className="stock-company-name">{this.props.stockData.name}</h5>
@@ -53,7 +56,7 @@ class StockListing extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+      </Link>
     );
   }
 }

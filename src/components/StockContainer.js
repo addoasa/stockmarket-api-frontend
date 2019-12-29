@@ -14,6 +14,11 @@ class StockContainer extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.setSortIncrease = this.setSortIncrease.bind(this);
   }
+
+  componentDidMount(){
+    this.props.toggleStockPageIsActive();
+
+  }
   toggleDropdownSort(){
     if(this.state.dropdownOpenSort){
       this.setState({dropdownOpenSort:false})
@@ -100,7 +105,7 @@ class StockContainer extends React.Component {
     } else {
       stockListings = this.props.stocksToRender.stocks.map((stock, index) =>
       // create a <StockListing /> component for every object in stockListings array
-        <StockListing key={`stock${index}`} stockData={stock} />);
+        <StockListing key={`stock${index}`} stockData={stock}  />);
     }
 
     return (

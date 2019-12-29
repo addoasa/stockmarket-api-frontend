@@ -1,6 +1,6 @@
 import React from 'react';
-import { Router, Link} from 'react-router';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import { Router} from 'react-router';
+import {BrowserRouter, Route, Switch , Link} from 'react-router-dom'
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import './index.css';
@@ -21,7 +21,8 @@ class App extends React.Component {
       haveReachedBottom: false,
       paginationSkip : 20,
       currentlySortingBy:"name",
-      sortIncrease: true
+      sortIncrease: true,
+      isStockPageActive: false,
       
     };
     this.startSearch = this.startSearch.bind(this); 
@@ -35,6 +36,7 @@ class App extends React.Component {
     this.sortStocksToRender = this.sortStocksToRender.bind(this);
     this.sortSearchResultsToRender = this.sortSearchResultsToRender.bind(this);
     this.toggleSortIncrease = this.toggleSortIncrease.bind(this);
+    this.toggleStockPageIsActive = this.toggleStockPageIsActive.bind(this);
   }
 
   componentDidMount() {
@@ -217,6 +219,23 @@ class App extends React.Component {
     
   }
 
+  // --------------------------------------------------------------------------------
+  // Routing Methods
+  // --------------------------------------------------------------------------------
+
+  toggleStockPageIsActive(){
+    if(this.state.isStockPageActive){
+      this.setState({
+        isStockPageActive: false,
+      })
+    }else{
+      this.setState({
+        isStockPageActive: true,
+      })
+    }
+  }
+  
+
   render() {
     console.log('RenderedStocks', this.state.stocksToRender);
    
@@ -228,6 +247,7 @@ class App extends React.Component {
             startSearch={this.startSearch}
             stopSearch={this.stopSearch}
             searchForStock={this.searchForStock}
+            isStockPageActive={this.state.isStockPageActive}
           />
           <Switch>
             <Route 
@@ -247,12 +267,22 @@ class App extends React.Component {
                     currentlySortingBy={this.state.currentlySortingBy}
                     toggleSortIncrease={this.toggleSortIncrease}         
                     sortIncrease ={this.state.sortIncrease}
+                    toggleStockPageIsActive={this.toggleStockPageIsActive}
                   />
                 )
               }
               }  
             />   
-            <Route path='/:cusip' component={StockPage}/>   
+            <Route path='/:cusip' 
+              render={(props) => {
+                return(
+                  <StockPage {...props} 
+                    toggleStockPageIsActive={this.toggleStockPageIsActive}
+                  />
+                )
+                }
+              }  
+            />  
           </Switch>   
           <Footer />
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter, Route, Switch , Link} from 'react-router-dom'
 import '../styles/Header.css';
 import {
   Collapse,
@@ -41,10 +42,15 @@ class Header extends React.Component {
             <NavbarBrand>
               <img className="mb-0" src={logo} alt="logo" />
             </NavbarBrand>
+            {
+              this.props.isStockPageActive ? 
+              <Link to= "/"><button>Back</button></Link>
+              :
               <Form>
                 <Input type="text" name="text" onChange = {this.handleChange} placeholder="search..." />
                 <Button>Search</Button>
               </Form>
+            }
             </Nav>
           </Navbar>
         </header>

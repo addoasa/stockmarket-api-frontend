@@ -15,6 +15,7 @@ class StockPage extends React.Component {
     this.calculateChange = this.calculateChange.bind(this);
   }
   componentDidMount(){
+    this.props.toggleStockPageIsActive();
     console.log(this.props.match.params.cusip)
     fetch(`http://localhost:4000/stocks/${this.props.match.params.cusip}`,{
       method:'get',
