@@ -1,0 +1,33 @@
+.stock-hud{
+  display:flex;
+  justify-content: space-between;
+  /* padding-top: 3%; */
+  margin-top:3%
+}
+.stock-hud-title{
+  font-weight: 600;
+  font-size: 35pt;
+  color:rgba(0,0,0,0.7)
+}
+.stock-hud-info{
+  font-weight: 400;
+  font-size: 15pt;
+  color:rgba(0,0,0,0.7)
+}
+.sorting-dropDown-menus{
+  display:flex;
+  padding-right: 2%;
+  margin-top: 3%;
+
+}
+
+.orderBy-dropDown{
+  margin-left: 10%;
+}
+
+.maincontent-loading-spinner{
+  /* height:50%; */
+  /* width:50% */
+  margin-top: 5rem;
+  margin-left: 30rem;
+}

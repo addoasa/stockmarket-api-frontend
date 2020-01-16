@@ -1,0 +1,28 @@
+.stockpage-loading-spinner{
+  margin:0 auto;
+}
+main{
+  margin-top: 3em;
+}
+.stockpage-heading{
+  display:flex;
+}
+.stockpage-label{
+  font-weight: 400;
+  padding-top: 1.5em;
+  color: rgba(0,0,0,0.8);
+}
+.stockpage-info{
+  font-weight: 700;
+  padding-top: 0.5em;
+  color: rgba(0,0,0,0.8);
+}
+.stockpage-symbol{
+  color: rgba(0,0,0,0.8);
+  font-weight: 900;
+  font-size: 80pt;
+}
+.stockpage-arrow-svg{
+  margin-top: 3.5em;
+  margin-left: 48em;
+}
